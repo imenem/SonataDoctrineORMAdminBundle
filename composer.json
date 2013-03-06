@@ -20,8 +20,7 @@
         "doctrine/orm": ">=2.3,<2.4",
         "sonata-project/admin-bundle": "2.2.*@dev",
         "sonata-project/block-bundle": "2.2.*@dev",
-        "symfony/symfony": ">=2.2,<2.3",
-        "knplabs/knp-menu-bundle": "1.1.x-dev"
+        "symfony/symfony": ">=2.2,<2.3"
     },
     "autoload": {
         "psr-0": { "Sonata\\DoctrineORMAdminBundle": "" }
