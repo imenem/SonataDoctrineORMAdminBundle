@@ -26,7 +26,16 @@ file that was distributed with this source code.
                                         {% if field_name == '_delete' %}
                                             <th>{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}</th>
                                         {% else %}
-                                            <th>{{ nested_field.vars['sonata_admin'].admin.trans(nested_field.vars.label) }}</th>
+                                            {% set th_class = '' %}
+
+                                            {% if   nested_field.vars['sonata_admin'].field_description.type is defined
+                                               and  nested_field.vars['sonata_admin'].field_description.type == 'hidden' %}
+                                                {% set th_class = th_class ~ ' hide' %}
+                                            {% endif %}
+
+                                            <th class="{{ th_class }}">
+                                                {{ nested_field.vars['sonata_admin'].admin.trans(nested_field.vars.label) }}
+                                            </th>
                                         {% endif %}
                                     {% endfor %}
                                 </tr>
@@ -35,7 +44,18 @@ file that was distributed with this source code.
                                 {% for nested_group_field_name, nested_group_field in form.children %}
                                     <tr>
                                         {% for field_name, nested_field in nested_group_field.children %}
-                                            <td class="sonata-ba-td-{{ id }}-{{ field_name  }}{% if nested_field.vars.errors|length > 0 %} error{% endif %}">
+                                            {% set td_class = 'sonata-ba-td-' ~ id ~ '-' ~ field_name %}
+
+                                            {% if nested_field.vars.errors|length > 0 %}
+                                                {% set td_class = td_class ~ ' error' %}
+                                            {% endif %}
+
+                                            {% if   nested_field.vars['sonata_admin'].field_description.type is defined
+                                               and  nested_field.vars['sonata_admin'].field_description.type == 'hidden' %}
+                                                {% set td_class = td_class ~ ' hide' %}
+                                            {% endif %}
+
+                                            <td class="{{ td_class }}">
                                                 {% if sonata_admin.field_description.associationadmin.formfielddescriptions[field_name] is defined %}
                                                     {{ form_widget(nested_field) }}
 
