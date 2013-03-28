@@ -33,6 +33,11 @@ file that was distributed with this source code.
                                                 {% set th_class = th_class ~ ' hide' %}
                                             {% endif %}
 
+                                            {% if   nested_field.vars.attr.class is defined
+                                               and  'hide' in nested_field.vars.attr.class %}
+                                                {% set th_class = th_class ~ ' hide' %}
+                                            {% endif %}
+
                                             <th class="{{ th_class }}">
                                                 {{ nested_field.vars['sonata_admin'].admin.trans(nested_field.vars.label) }}
                                             </th>
@@ -52,6 +57,11 @@ file that was distributed with this source code.
 
                                             {% if   nested_field.vars['sonata_admin'].field_description.type is defined
                                                and  nested_field.vars['sonata_admin'].field_description.type == 'hidden' %}
+                                                {% set td_class = td_class ~ ' hide' %}
+                                            {% endif %}
+
+                                            {% if   nested_field.vars.attr.class is defined
+                                               and  'hide' in nested_field.vars.attr.class %}
                                                 {% set td_class = td_class ~ ' hide' %}
                                             {% endif %}
 
